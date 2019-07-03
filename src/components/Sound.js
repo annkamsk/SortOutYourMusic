@@ -21,7 +21,7 @@ export default class Sound extends React.Component {
         this.audio = new Audio(this.getAudioName(props.sound));
     }
     getAudioName = (sound) => {
-        let octave = octaves[sound / notes.length].octave;
+        let octave = octaves[Math.floor(sound / notes.length)].octave;
         let note = notes[sound % notes.length].note;
         if (note.endsWith('#')) {
             return note.charAt(0).toLocaleLowerCase() + '-' + octave;

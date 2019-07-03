@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import List from '../components/List';
 import '../index.scss';
+import Select from "./SelectAlgo";
 
 export default class Keyboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: props.data,
-            algo: props.algo,
-            scale: props.scale,
         };
     }
 
@@ -21,10 +20,7 @@ export default class Keyboard extends React.Component {
                         <button className="data-toggle" onClick={this.mixItUp}>Mix it up!</button>
                     </div>
                     <div className="selections">
-                        <select className="selectAlgo"/>
-                    </div>
-                    <div className="buttons">
-                        <button className="data-toggle" onClick={this.sort}>Sort!</button>
+                        <Select items={this.state.data} handleSubmit={this.generate}/>
                     </div>
                 </header>
                 <div className="list-container">
@@ -34,8 +30,8 @@ export default class Keyboard extends React.Component {
         )
     }
 
-    generate = () => {
-
+    generate = (scale) => {
+        console.log("Hello!");
     };
     mixItUp = () => {
         const array = this.state.data;

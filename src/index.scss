@@ -72,6 +72,40 @@ header .buttons button {
  }
 }
 
+header .selections {
+  align-self: flex-end;
+  flex: 1;
+  text-align: left;
+}
+
+header .selections label {
+  color: #2c3db4;
+  padding: 10px 15px;
+}
+
+header .selections select {
+  display: inline-block;
+  border: 1px solid steelblue;
+  border-radius: 3px;
+  padding: 10px 15px;
+  color: steelblue;
+  margin-left: 10px;
+}
+
+header .selections button {
+  display: inline-block;
+  border: 1px solid steelblue;
+  border-radius: 3px;
+  padding: 10px 15px;
+  color: steelblue;
+  margin-left: 10px;
+
+  &:hover {
+    background: steelblue;
+    color: white;
+  }
+}
+
 .list-container {
   padding-left: 20px;
 }
