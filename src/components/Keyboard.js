@@ -1,13 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import List from '../components/List';
 import '../index.scss';
-import Select from "./SelectAlgo";
+import SelectScale from "./SelectScale";
+import SelectAlgo from "./SelectAlgo";
 
 export default class Keyboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            keys: 20,
             data: props.data,
         };
     }
@@ -17,22 +18,30 @@ export default class Keyboard extends React.Component {
             <div>
                 <header>
                     <div className="buttons">
-                        <button className="data-toggle" onClick={this.mixItUp}>Mix it up!</button>
+                        <button className="data-toggle"
+                                onClick={this.mixItUp}>Mix it up!</button>
                     </div>
                     <div className="selections">
-                        <Select items={this.state.data} handleSubmit={this.generate}/>
+                        <SelectScale
+                            keys={this.state.keys}
+                            onItemsChange={this.handleItemsChange}/>
+                        <SelectAlgo
+                            keys={this.state.keys}
+                            onItemsChange={this.handleItemsChange}/>
                     </div>
                 </header>
                 <div className="list-container">
-                    <List items={this.state.data} ripItUp={this.ripItUp}/>
+                    <List
+                        items={this.state.data}/>
                 </div>
             </div>
         )
     }
 
-    generate = (scale) => {
-        console.log("Hello!");
+    handleItemsChange = (items) => {
+        this.setState({keys: this.state.keys, data: items});
     };
+
     mixItUp = () => {
         const array = this.state.data;
         let currentIndex = array.length, temporaryValue, randomIndex;
@@ -50,9 +59,6 @@ export default class Keyboard extends React.Component {
             array[randomIndex] = temporaryValue;
         }
 
-        this.setState({data: array});
-    };
-    sort = () => {
-
+        this.setState({keys: this.state.keys, data: array});
     };
 }

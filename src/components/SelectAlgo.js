@@ -1,17 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import '../index.scss';
+import {Algos} from './Config';
 
-const Algos = [ { id: 0, name: 'Bubble' }, { id: 1, name: 'Selection'} ];
-const Scales = [ { id: 0, name: 'Major' }, ];
-
-export default class Select extends React.Component {
+export default class SelectAlgo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: props.items,
             algo: 'Bubble',
-            scale: 'Major',
         };
     }
 
@@ -25,21 +20,22 @@ export default class Select extends React.Component {
         });
     };
     handleSubmit = (event) => {
-        this.props.handleSubmit();
+        this.sort();
         event.preventDefault();
+    };
+
+    sort = () => {
+        const algo = this.state.algo;
+        const array = [];
+        for (let i = 0; i < this.props.keys; ++i) {
+
+            this.props.onItemsChange(array);
+        }
     };
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <label>
-                    Scale
-                    <select className="selections" value={this.state.scale} name="scale" onChange={this.handleInputChange}>
-                        {Scales.map(s =>
-                            <option key={s.id} value={s.id}>{s.name}</option>
-                        )}
-                    </select>
-                </label>
                 <label>
                     Algorithm
                     <select className="selections" value={this.state.algo} name="algo" onChange={this.handleInputChange}>
@@ -48,7 +44,7 @@ export default class Select extends React.Component {
                         )}
                     </select>
                 </label>
-                <button className="buttons" type="submit">Generate</button>
+                <button className="buttons" type="submit">Sort</button>
             </form>
         );
     }
