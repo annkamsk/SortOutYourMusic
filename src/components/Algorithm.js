@@ -2,40 +2,32 @@ import React from 'react';
 import '../index.scss';
 import {BubbleSortStrategy} from "./BubbleSortStrategy";
 
-const nameToStrategy = new Map.set('Bubble', BubbleSortStrategy);
+const nameToStrategy = new Map().set('Bubble', BubbleSortStrategy);
 
 export class Algorithm {
     constructor(strategyName) {
         this.instructions = [];
         this.step = 0;
-        this.isFinished = false;
         this.strategy = nameToStrategy.get(strategyName);
     }
 
-    isSortingFinished = () => {
-        return this.isFinished;
+    isNext = () => {
+        return this.step < this.instructions.length;
     };
 
     init = (array) => {
-        this.isFinished = false;
         this.instructions = this.strategy.execute(array);
         this.step = 0;
     };
 
     nextStep = (array) => {
-        const newArray = array;
-        if (this.instructions.length === this.step) {
+        if (!this.isNext()) {
             return array;
         }
         const pair = this.instructions[this.step];
-        this.swap(pair[0], pair[1], newArray);
+        [array[pair[0]], array[pair[1]]] = [array[pair[1]], array[pair[0]]];
         ++this.step;
-        return newArray;
+        return array;
     };
 
-    swap = (i, j, array) => {
-        const tmp = array[i];
-        array[i] = array[j];
-        array[j] = tmp;
-    };
 }

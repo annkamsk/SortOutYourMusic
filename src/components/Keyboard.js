@@ -3,13 +3,18 @@ import List from '../components/List';
 import '../index.scss';
 import SelectScale from "./SelectScale";
 import SelectAlgo from "./SelectAlgo";
+import {Scales} from "./Config";
+import {Algorithm} from "./Algorithm";
 
 export default class Keyboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            keys: 20,
-            data: props.data,
+            data: [
+                0, 15, 10, 4, 20
+            ],
+            algo: '',
+            scale: 'Major',
         };
     }
 
@@ -17,17 +22,22 @@ export default class Keyboard extends React.Component {
         return (
             <div>
                 <header>
+                    {/*<div className="buttons">*/}
+                    {/*    <button className="data-toggle"*/}
+                    {/*            onClick={this.mixItUp}>Mix it up!*/}
+                    {/*    </button>*/}
+                    {/*</div>*/}
                     <div className="buttons">
                         <button className="data-toggle"
-                                onClick={this.mixItUp}>Mix it up!</button>
+                                onClick={this.generate}>Generate
+                        </button>
                     </div>
                     <div className="selections">
                         <SelectScale
-                            keys={this.state.keys}
-                            onItemsChange={this.handleItemsChange}/>
+                            onChange={this.handleScaleChange}/>
+
                         <SelectAlgo
-                            keys={this.state.keys}
-                            onItemsChange={this.handleItemsChange}/>
+                            onItemsChange={this.handleAlgorithmChange}/>
                     </div>
                 </header>
                 <div className="list-container">
@@ -38,9 +48,14 @@ export default class Keyboard extends React.Component {
         )
     }
 
-    handleItemsChange = (items) => {
-        this.setState({keys: this.state.keys, data: items});
+    handleScaleChange = (value) => {
+        // this.setState({scale: value});
     };
+
+    handleAlgorithmChange = (value) => {
+        this.sort(value);
+    };
+
 
     mixItUp = () => {
         const array = this.state.data;
@@ -59,6 +74,28 @@ export default class Keyboard extends React.Component {
             array[randomIndex] = temporaryValue;
         }
 
-        this.setState({keys: this.state.keys, data: array});
+        this.setState({data: array});
+    };
+
+
+    generate = () => {
+        this.setState(state => {
+            const scale = Scales.get('Major');
+            const data = new Array(state.data.length)
+                .fill(0)
+                .map(() => scale[Math.floor(scale.length * Math.random())]);
+            return {
+                data,
+            };
+        });
+    };
+
+    sort = (algoName) => {
+        const algo = new Algorithm(algoName);
+        algo.init(this.state.data);
+        while (algo.isNext()) {
+            const items = algo.nextStep(this.state.data);
+            this.setState({data: items, algo: algoName});
+        }
     };
 }

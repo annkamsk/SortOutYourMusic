@@ -3,23 +3,18 @@ import '../index.scss';
 
 export class BubbleSortStrategy {
 
-    execute = (items) => {
-        const array = items;
+    static execute = (items) => {
+        const array = [...items];
         const instructions = [];
-        for (let i = 0; i < array.length; ++i) {
-            for (let j = 0; j < array.length - 1; ++j) {
-                if (array[j] > array[j + 1]) {
+        for (let i = 0; i < items.length; ++i) {
+            for (let j = 0; j < items.length - 1; ++j) {
+                if (array[j].sound > array[j + 1].sound) {
                     instructions.push([j, j + 1]);
-                    this.swap(j, j + 1, array);
+                    [array[j], array[j + 1]] = [array[j + 1], array[j]];
                 }
             }
         }
         return instructions;
     };
 
-    swap = (i, j, array) => {
-        const tmp = array[i];
-        array[i] = array[j];
-        array[j] = tmp;
-    };
 }

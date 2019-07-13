@@ -12,7 +12,7 @@ export default class List extends React.Component {
     }
     handleItemRender = (item, index) => {
         return(
-            <Key key={item.key} sound={item.sound} />
+            <Key index={index} sound={item} />
         );
     };
 

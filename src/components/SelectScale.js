@@ -15,24 +15,11 @@ export default class SelectScale extends React.Component {
         const value = target.value;
         const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
+        this.props.onChange(value);
     };
     handleSubmit = (event) => {
-        this.generate();
         event.preventDefault();
-    };
-
-    generate = () => {
-        const scale = this.state.scale;
-        console.log(scale);
-        const array = [];
-        for (let i = 0; i < this.props.keys; ++i) {
-            const randomIdx = Math.floor(Math.random() * Scales.get(scale).length);
-            array.push({ key: i  + 1, sound: Scales.get(scale)[randomIdx] });
-        }
-        this.props.onItemsChange(array);
+        this.props.onItemsChange(this.state.scale);
     };
 
     render() {
@@ -46,7 +33,7 @@ export default class SelectScale extends React.Component {
                         )}
                     </select>
                 </label>
-                <button className="buttons" type="submit">Generate</button>
+            {/*    <button className="buttons" type="submit">Generate</button>*/}
             </form>
         );
     }

@@ -8,6 +8,7 @@ export default class SelectAlgo extends React.Component {
         this.state = {
             algo: 'Bubble',
         };
+        console.log(this.props.items);
     }
 
     handleInputChange = (event) => {
@@ -20,17 +21,8 @@ export default class SelectAlgo extends React.Component {
         });
     };
     handleSubmit = (event) => {
-        this.sort();
         event.preventDefault();
-    };
-
-    sort = () => {
-        const algo = this.state.algo;
-        const array = [];
-        for (let i = 0; i < this.props.keys; ++i) {
-
-            this.props.onItemsChange(array);
-        }
+        this.props.onItemsChange(this.state.algo);
     };
 
     render() {

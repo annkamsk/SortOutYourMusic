@@ -3,32 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import Keyboard from '../src/components/Keyboard';
 
-const data = [
-    {
+const data = [{
         'key': 1,
         'sound': 0,
-    },
-    {
+    }, {
         'key': 2,
         'sound': 10,
 
-    },
-    {
+    }, {
         'key': 3,
         'sound': 12,
 
-    },
-    {
+    }, {
         'key': 4,
         'sound': 13,
 
-    },
-    {
+    }, {
         'key': 5,
         'sound': 20,
 
-    },
-];
+    }];
 
 ReactDOM.render(
     <Keyboard data={data} />,

@@ -18,7 +18,7 @@ export default class Sound extends React.Component {
         this.state = {
             sound: props.sound,
         };
-        this.audio = new Audio(this.getAudioName(props.sound));
+        // this.audio = new Audio(this.getAudioName(props.sound));
     }
     getAudioName = (sound) => {
         let octave = octaves[Math.floor(sound / notes.length)].octave;
