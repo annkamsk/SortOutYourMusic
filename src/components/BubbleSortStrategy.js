@@ -8,7 +8,7 @@ export class BubbleSortStrategy {
         const instructions = [];
         for (let i = 0; i < items.length; ++i) {
             for (let j = 0; j < items.length - 1; ++j) {
-                if (array[j].sound > array[j + 1].sound) {
+                if (array[j] > array[j + 1]) {
                     instructions.push([j, j + 1]);
                     [array[j], array[j + 1]] = [array[j + 1], array[j]];
                 }

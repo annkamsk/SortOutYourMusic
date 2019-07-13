@@ -2,13 +2,13 @@ import React from 'react';
 import '../index.scss';
 import {BubbleSortStrategy} from "./BubbleSortStrategy";
 
-const nameToStrategy = new Map().set('Bubble', BubbleSortStrategy);
+const nameToStrategy = new Map().set('Bubble', (array) => BubbleSortStrategy.execute(array));
 
 export class Algorithm {
     constructor(strategyName) {
         this.instructions = [];
         this.step = 0;
-        this.strategy = nameToStrategy.get(strategyName);
+        this.strategy = strategyName;
     }
 
     isNext = () => {
@@ -16,7 +16,8 @@ export class Algorithm {
     };
 
     init = (array) => {
-        this.instructions = this.strategy.execute(array);
+        this.instructions = nameToStrategy.get(this.strategy)(array);
+        console.log(this.instructions);
         this.step = 0;
     };
 

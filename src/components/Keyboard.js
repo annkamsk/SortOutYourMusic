@@ -11,7 +11,7 @@ export default class Keyboard extends React.Component {
         super(props);
         this.state = {
             data: [
-                0, 15, 10, 4, 20
+                0, 15, 10, 4, 20, 21, 5, 3, 8
             ],
             algo: '',
             scale: 'Major',
@@ -22,11 +22,6 @@ export default class Keyboard extends React.Component {
         return (
             <div>
                 <header>
-                    {/*<div className="buttons">*/}
-                    {/*    <button className="data-toggle"*/}
-                    {/*            onClick={this.mixItUp}>Mix it up!*/}
-                    {/*    </button>*/}
-                    {/*</div>*/}
                     <div className="buttons">
                         <button className="data-toggle"
                                 onClick={this.generate}>Generate
@@ -49,38 +44,16 @@ export default class Keyboard extends React.Component {
     }
 
     handleScaleChange = (value) => {
-        // this.setState({scale: value});
+        this.setState({scale: value});
     };
 
     handleAlgorithmChange = (value) => {
         this.sort(value);
     };
 
-
-    mixItUp = () => {
-        const array = this.state.data;
-        let currentIndex = array.length, temporaryValue, randomIndex;
-
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-
-            // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-
-        this.setState({data: array});
-    };
-
-
     generate = () => {
         this.setState(state => {
-            const scale = Scales.get('Major');
+            const scale = Scales.get(state.scale);
             const data = new Array(state.data.length)
                 .fill(0)
                 .map(() => scale[Math.floor(scale.length * Math.random())]);
@@ -95,7 +68,7 @@ export default class Keyboard extends React.Component {
         algo.init(this.state.data);
         while (algo.isNext()) {
             const items = algo.nextStep(this.state.data);
-            this.setState({data: items, algo: algoName});
+            this.setState({data: items});
         }
     };
 }
