@@ -1,4 +1,3 @@
-import React from 'react';
 import '../index.scss';
 import {BubbleSortStrategy} from "./BubbleSortStrategy";
 
@@ -17,7 +16,6 @@ export class Algorithm {
 
     init = (array) => {
         this.instructions = nameToStrategy.get(this.strategy)(array);
-        console.log(this.instructions);
         this.step = 0;
     };
 

@@ -53,7 +53,6 @@ header h1 {
 }
 
 header .buttons {
-  align-self: flex-end;
   flex: 1;
   text-align: left;
 }
@@ -74,7 +73,7 @@ header .buttons button {
 
 header .selections {
   display: flex;
-  flex: 1;
+  //flex: 1;
   text-align: left;
 }
 
@@ -106,40 +105,24 @@ header .selections button {
   }
 }
 
-.list-container {
-  padding-left: 20px;
-}
+// keyboard
 
 .list-container {
-h1,h2,h3,h4,h5 {
-  margin: 0;
-}
+  padding-left: 20px;
+  position: absolute;
+  bottom: 100px;
 }
 
 .list ul {
-  text-align: center;
-  vertical-align: bottom;
-  display: inline-block;
+  display: flex;
 }
 
 .list li {
+  display: inline-block;
+  vertical-align: bottom;
+  position: relative;
   list-style: none;
-  position: absolute;
-  width: 60px;
-  bottom: 0;
-  transition: all 0.4s ease-out;
+  width: 70px;
+  transition: all 1s ease-out;
   background-color: rgb(215, 215, 215);
 }
-
-.list li:nth-child(0)  { transform: translate(0%, 0); }
-.list li:nth-child(1)  { transform: translate(100%, 0); }
-.list li:nth-child(2)  { transform: translate(200%, 0); }
-.list li:nth-child(3)  { transform: translate(300%, 0); }
-.list li:nth-child(4)  { transform: translate(400%, 0); }
-.list li:nth-child(5)  { transform: translate(500%, 0); }
-.list li:nth-child(6)  { transform: translate(600%, 0); }
-.list li:nth-child(7)  { transform: translate(700%, 0); }
-.list li:nth-child(8)  { transform: translate(800%, 0); }
-.list li:nth-child(9)  { transform: translate(900%, 0); }
-.list li:nth-child(10)  { transform: translate(1000%, 0); }
-.list li:nth-child(11)  { transform: translate(1100%, 0); }

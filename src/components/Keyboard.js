@@ -22,15 +22,16 @@ export default class Keyboard extends React.Component {
         return (
             <div>
                 <header>
+                    <div className="selections">
+                        <SelectScale
+                            onChange={this.handleScaleChange}/>
+                    </div>
                     <div className="buttons">
                         <button className="data-toggle"
                                 onClick={this.generate}>Generate
                         </button>
                     </div>
                     <div className="selections">
-                        <SelectScale
-                            onChange={this.handleScaleChange}/>
-
                         <SelectAlgo
                             onItemsChange={this.handleAlgorithmChange}/>
                     </div>
@@ -66,9 +67,15 @@ export default class Keyboard extends React.Component {
     sort = (algoName) => {
         const algo = new Algorithm(algoName);
         algo.init(this.state.data);
-        while (algo.isNext()) {
-            const items = algo.nextStep(this.state.data);
-            this.setState({data: items});
-        }
+        this.sortOne(algo);
     };
+
+    sortOne = (algo) => {
+        if (!algo.isNext()) return;
+        const items = algo.nextStep(this.state.data);
+        this.setState({data: items, algo: algo.strategy},
+            () => setTimeout(() => {
+                this.sortOne(algo);
+            }, 1000));
+    }
 }
