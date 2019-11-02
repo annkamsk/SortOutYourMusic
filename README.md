@@ -1,3 +1,6 @@
+## TODO
+    - implement the generate function so it creates an array of unique notes in a scale
+    
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
