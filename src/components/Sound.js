@@ -1,6 +1,6 @@
 import React from 'react';
 import '../index.scss';
-
+import {Notes} from './Config';
 const notes = [
     {id: 0, note: 'C'}, {id: 1, note: 'C#'}, {id: 2, note: 'D'}, {id: 3, note: 'D#'}, {id: 4, note: 'E'},
     {id: 5, note: 'F'}, {id: 6, note: 'F#'}, {id: 7, note: 'G'}, {id: 8, note: 'G#'}, {id: 9, note: 'A'},
@@ -11,7 +11,7 @@ const octaves = [
     {id: 0, octave: 3}, {id: 1, octave: 4}, {id: 2, octave: 5},
 ];
 
-export default class Sound extends React.Component {
+class Sound extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,10 +28,15 @@ export default class Sound extends React.Component {
         if (note.endsWith('#')) {
             return prefix + note.charAt(0).toLocaleLowerCase() + '-' + octave + sufix;
         } else {
-            return  prefix + '_' + note.charAt(0).toLocaleLowerCase() + octave + sufix;
+            return prefix + '_' + note.charAt(0).toLocaleLowerCase() + octave + sufix;
         }
     };
     play = () => {
-        this.audio.play();
+        return this.audio.play();
     };
+}
+
+export default class Sounds {
+    static data = [...Notes];
+    static sounds = new Map(this.data.map(s => [s, new Sound({sound: s})]));
 }

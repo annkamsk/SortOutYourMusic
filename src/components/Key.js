@@ -1,35 +1,31 @@
 import React from 'react';
 import '../index.scss';
-import Sound from '../components/Sound';
+import Sounds from '../components/Sound';
 
 export default class Key extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: props.index,
-            height: props.sound * 10 + 100,
-        };
-    }
-    play  = () => {
-        const sound = new Sound({ sound: this.props.sound, });
+
+    play = () => {
+        const sound = Sounds.sounds.get(this.props.sound);
         sound.play();
     };
+
     render() {
-        const x = this.props.sound * 100;
-        const ctrans = 'translate('+x+'%, 0)';
-        // TODO nope - changes only height, not position, position needs to be changed
-        // maybe make separate functions for generate and sort render?
-        const height = this.props.sound * 10 + 100;
+        const x = this.props.position * 70 + 100;
+        const ctrans = 'translate(' + x + '%)';
+        const color = 'rgb(' + this.props.sound * 100 % 256 + ',' + this.props.sound * 20 % 256 + ',' + this.props.sound * 5 % 256 + ')';
         const styles = {
             transform: ctrans,
-            // height: height,
-            left: x,
-            height: this.state.height,
+            height: this.props.sound * 10 + 100,
+            backgroundColor: color
         };
-        this.play();
         return (
-            <li style={styles}>
-            </li>
+            <li style={styles}></li>
         );
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.position !== prevProps.position) {
+            this.play();
+        }
     }
 }

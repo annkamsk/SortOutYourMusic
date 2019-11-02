@@ -123,6 +123,6 @@ header .selections button {
   position: relative;
   list-style: none;
   width: 70px;
-  transition: all 1s ease-out;
+  transition: transform ease-out 2s;
   background-color: rgb(215, 215, 215);
 }

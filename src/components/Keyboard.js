@@ -3,16 +3,14 @@ import List from '../components/List';
 import '../index.scss';
 import SelectScale from "./SelectScale";
 import SelectAlgo from "./SelectAlgo";
-import {Scales} from "./Config";
+import {Scales, Notes} from "./Config";
 import {Algorithm} from "./Algorithm";
 
 export default class Keyboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                0, 15, 10, 4, 20, 21, 5, 3, 8
-            ],
+            data: Notes,
             algo: '',
             scale: 'Major',
         };
@@ -54,10 +52,15 @@ export default class Keyboard extends React.Component {
 
     generate = () => {
         this.setState(state => {
-            const scale = Scales.get(state.scale);
-            const data = new Array(state.data.length)
-                .fill(0)
-                .map(() => scale[Math.floor(scale.length * Math.random())]);
+            let scale = Scales.get(state.scale);
+            const data = new Array(scale.length);
+            data.fill(0);
+            for (let i = 0; i < data.length; ++i) {
+                let ind = Math.floor(scale.length * Math.random());
+                data[i] = scale[ind];
+                console.log(data[i]);
+                scale.splice(ind, 1);
+            }
             return {
                 data,
             };
