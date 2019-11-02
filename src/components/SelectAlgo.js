@@ -8,7 +8,6 @@ export default class SelectAlgo extends React.Component {
         this.state = {
             algo: 'Bubble',
         };
-        console.log(this.props.items);
     }
 
     handleInputChange = (event) => {
@@ -32,7 +31,7 @@ export default class SelectAlgo extends React.Component {
                     Algorithm
                     <select className="selections" value={this.state.algo} name="algo" onChange={this.handleInputChange}>
                         {Algos.map(a =>
-                            <option key={a.id} value={a.id}>{a.name}</option>
+                            <option key={a.id} value={a.name}>{a.name}</option>
                         )}
                     </select>
                 </label>

@@ -1,7 +1,5 @@
 import '../index.scss';
-import {BubbleSortStrategy} from "./BubbleSortStrategy";
-
-const nameToStrategy = new Map().set('Bubble', (array) => BubbleSortStrategy.execute(array));
+import {nameToStrategy} from "./Config";
 
 export class Algorithm {
     constructor(strategyName) {
@@ -15,6 +13,7 @@ export class Algorithm {
     };
 
     init = (array) => {
+        console.log(nameToStrategy);
         this.instructions = nameToStrategy.get(this.strategy)(array);
         this.step = 0;
     };
