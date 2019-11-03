@@ -1,5 +1,6 @@
 ## TODO
-    - implement the generate function so it creates an array of unique notes in a scale
+    - --implement the generate function so it creates an array of unique notes in a scale--
+    - softer sound on comparing
     
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
