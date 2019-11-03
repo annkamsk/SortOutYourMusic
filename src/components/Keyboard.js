@@ -5,7 +5,8 @@ import SelectScale from "./SelectScale";
 import SelectAlgo from "./SelectAlgo";
 import {Scales, Data, Octaves, Notes} from "./Config";
 import {Algorithm} from "./Algorithm";
-import Sounds from "./Sound";
+import SelectBase from "./SelectBase";
+import {getKey} from "../utils";
 
 export default class Keyboard extends React.Component {
     constructor(props) {
@@ -14,6 +15,7 @@ export default class Keyboard extends React.Component {
             data: Data,
             algo: '',
             scale: 'Major',
+            base: 'C',
         };
     }
 
@@ -24,6 +26,10 @@ export default class Keyboard extends React.Component {
                     <div className="selections">
                         <SelectScale
                             onChange={this.handleScaleChange}/>
+                    </div>
+                    <div className="selections">
+                        <SelectBase
+                            onChange={this.handleBaseChange}/>
                     </div>
                     <div className="buttons">
                         <button className="data-toggle"
@@ -43,6 +49,10 @@ export default class Keyboard extends React.Component {
         )
     }
 
+    handleBaseChange = (value) => {
+        this.setState({base: value});
+    };
+
     handleScaleChange = (value) => {
         this.setState({scale: value});
     };
@@ -53,10 +63,10 @@ export default class Keyboard extends React.Component {
 
     generate = () => {
         this.setState(state => {
-            let scale = Scales.get(state.scale);
+            let scale = Scales.get(state.scale).map(v => (v + getKey(Notes, state.base)) % 12);
             const data = scale.map(n => {
                 return [...Array(Octaves.length).keys()]
-                    .map(v => n + Notes.length * v) // produces the same sound for each octave
+                    .map(v => n + Notes.size * v) // produces the same sound for each octave
             }).flat()
                 .sort(() => 0.5 - Math.random()) // shuffle
                 .slice(0, Data.length);

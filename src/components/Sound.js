@@ -1,6 +1,6 @@
 import React from 'react';
 import '../index.scss';
-import {Data, Octaves, Notes} from './Config';
+import {Octaves, Notes} from './Config';
 
 class Sound extends React.Component {
     constructor(props) {
@@ -14,8 +14,8 @@ class Sound extends React.Component {
     getAudioName = (sound) => {
         const prefix = process.env.PUBLIC_URL + '/sounds/';
         const sufix = '.mp3';
-        const octave = Octaves[Math.floor(sound / Notes.length)].octave;
-        const note = Notes[sound % Notes.length].note;
+        const octave = Octaves[Math.floor(sound / Notes.size)].octave;
+        const note = Notes.get(sound % Notes.size);
         if (note.endsWith('#')) {
             return prefix + note.charAt(0).toLocaleLowerCase() + '-' + octave + sufix;
         } else {
@@ -30,7 +30,7 @@ class Sound extends React.Component {
 export default class Sounds {
     static data = [...Notes.keys()].map(n => {
         return [...Array(Octaves.length).keys()]
-            .map(v => n + Notes.length * v) // produces the same sound for each octave
+            .map(v => n + Notes.size * v) // produces the same sound for each octave
     }).flat();
 
     static sounds = new Map(this.data.map(s => [s, new Sound({sound: s})]));

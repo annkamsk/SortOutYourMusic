@@ -1,12 +1,12 @@
 import React from 'react';
 import '../index.scss';
-import {Scales} from './Config';
+import {Notes} from './Config';
 
-export default class SelectScale extends React.Component {
+export default class SelectBase extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            scale: 'Major'
+            base: 'C',
         };
     }
 
@@ -18,21 +18,21 @@ export default class SelectScale extends React.Component {
     };
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.onItemsChange(this.props.scale);
+        this.props.onItemsChange(this.props.base);
     };
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <label>
-                    Scale
-                    <select className="selections" value={this.props.scale} name="scale" onChange={this.handleInputChange}>
-                        {Array.from(Scales.keys()).map(s =>
+                    Base
+                    <select className="selections" value={this.props.base} name="base" onChange={this.handleInputChange}>
+                        {Array.from(Notes.values()).map(s =>
                             <option key={s} value={s}>{s}</option>
                         )}
                     </select>
                 </label>
-            {/*    <button className="buttons" type="submit">Generate</button>*/}
+                {/*    <button className="buttons" type="submit">Generate</button>*/}
             </form>
         );
     }
