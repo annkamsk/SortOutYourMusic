@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/SortOutYourMusic/static/css/main.91d8b251.chunk.css",
+    "main.js": "/SortOutYourMusic/static/js/main.a815de1a.chunk.js",
+    "main.js.map": "/SortOutYourMusic/static/js/main.a815de1a.chunk.js.map",
+    "runtime~main.js": "/SortOutYourMusic/static/js/runtime~main.959dc711.js",
+    "runtime~main.js.map": "/SortOutYourMusic/static/js/runtime~main.959dc711.js.map",
+    "static/js/2.1135f4c6.chunk.js": "/SortOutYourMusic/static/js/2.1135f4c6.chunk.js",
+    "static/js/2.1135f4c6.chunk.js.map": "/SortOutYourMusic/static/js/2.1135f4c6.chunk.js.map",
+    "index.html": "/SortOutYourMusic/index.html",
+    "precache-manifest.69c58968776bbfa085fb4e564ac17146.js": "/SortOutYourMusic/precache-manifest.69c58968776bbfa085fb4e564ac17146.js",
+    "service-worker.js": "/SortOutYourMusic/service-worker.js",
+    "static/css/main.91d8b251.chunk.css.map": "/SortOutYourMusic/static/css/main.91d8b251.chunk.css.map"
+  }
+}
