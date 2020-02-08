@@ -1,5 +1,6 @@
 import {BubbleSortStrategy} from "../strategies/BubbleSortStrategy";
 import {SelectionSortStrategy} from "../strategies/SelectionSortStrategy";
+import {QuickSortStrategy} from "../strategies/QuickSortStrategy";
 
 export const Scales = new Map()
     .set('Major', [0, 2, 4, 5, 7, 9, 11])
@@ -8,7 +9,7 @@ export const Scales = new Map()
     .set('Whole tone', [0, 2, 4, 6, 8, 10])
     .set('Octatonic', [0, 1, 3, 4, 7, 8, 10, 11]);
 
-export const Algos = [ { id: 0, name: 'Bubble' }, { id: 1, name: 'Selection'} ];
+export const Algos = [ { id: 0, name: 'Bubble' }, { id: 1, name: 'Selection'}, {id: 2, name: 'QuickSort'} ];
 
 export const Data = [0, 15, 10, 4, 20, 32, 5, 3, 8];
 
@@ -22,4 +23,5 @@ export const Octaves = [
 
 export const nameToStrategy = new Map()
     .set('Bubble', (array) => BubbleSortStrategy.execute(array))
-    .set('Selection', (array) => SelectionSortStrategy.execute(array));
+    .set('Selection', (array) => SelectionSortStrategy.execute(array))
+    .set('QuickSort', (array) => QuickSortStrategy.execute(array));
